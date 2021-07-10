@@ -111,4 +111,30 @@ public class AdvancedStrategyRollAgain {
 		boolean result = this.strategy.rollAgain(1, 8, 13, 3);
 		assertEquals(true, result);
 	}
+
+	/**
+	 * BOUNDARY Test when players expected number of rolls is more than
+	 * opponents using average 7 points per roll
+	 */
+	@Test
+	public void testWhenOtherPlayerNeedsMoreRollsToWin() {
+		int opponentPointsToGoal = 54;
+		int pointsToGoal = 59;
+		
+		boolean result = this.strategy.rollAgain(0, 0, pointsToGoal, opponentPointsToGoal);
+		assertEquals(true, result);
+	}
+
+	/**
+	 * BOUNDARY Test when players expected number of rolls is less than
+	 * opponents using average 7 points per roll
+	 */
+	@Test
+	public void testWhenOtherPlayerNeedsLessRollsToWin() {
+		int opponentPointsToGoal = 59;
+		int pointsToGoal = 54;
+
+		boolean result = this.strategy.rollAgain(0, 0, pointsToGoal, opponentPointsToGoal);
+		assertEquals(true, result);
+	}
 }
