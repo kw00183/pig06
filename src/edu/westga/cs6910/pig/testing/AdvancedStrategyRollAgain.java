@@ -33,7 +33,7 @@ public class AdvancedStrategyRollAgain {
 		boolean result = this.strategy.rollAgain(0, 0, 100, 100);
 		assertEquals(true, result);
 	}
-	
+
 	/**
 	 * SUNNY-DAY Test for the first roll of the game by the computer when the
 	 * human player rolled 1 and has no points
@@ -52,5 +52,25 @@ public class AdvancedStrategyRollAgain {
 	public void testShouldReturnTrueAtStartOfGameAfterHumanPlayerHasGoneWithSomePoints() {
 		boolean result = this.strategy.rollAgain(0, 0, 100, 93);
 		assertEquals(true, result);
+	}
+
+	/**
+	 * BOUNDARY Test when the player has a valid roll, resulting in exactly 100
+	 * points (had 93 and rolled a 7)
+	 */
+	@Test
+	public void testWhenPlayerHasExactly100Points() {
+		boolean result = this.strategy.rollAgain(1, 7, 0, 13);
+		assertEquals(false, result);
+	}
+
+	/**
+	 * BOUNDARY Test when the player has a valid roll, resulting in more than
+	 * 100 points (had 93 and rolled a 10)
+	 */
+	@Test
+	public void testWhenPlayerExceeds100Points() {
+		boolean result = this.strategy.rollAgain(1, 10, -3, 13);
+		assertEquals(false, result);
 	}
 }
