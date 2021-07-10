@@ -93,4 +93,22 @@ public class AdvancedStrategyRollAgain {
 		boolean result = this.strategy.rollAgain(0, 0, 13, -3);
 		assertEquals(false, result);
 	}
+
+	/**
+	 * BOUNDARY Test when the other player needs exactly 7 points to win
+	 */
+	@Test
+	public void testWhenOtherPlayerNeeds7PointsToWin() {
+		boolean result = this.strategy.rollAgain(1, 5, 13, 7);
+		assertEquals(true, result);
+	}
+
+	/**
+	 * BOUNDARY Test when the other player needs less than 7 points to win
+	 */
+	@Test
+	public void testWhenOtherPlayerNeedsLessThan7PointsToWin() {
+		boolean result = this.strategy.rollAgain(1, 8, 13, 3);
+		assertEquals(true, result);
+	}
 }
