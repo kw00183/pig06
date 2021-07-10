@@ -120,8 +120,9 @@ public class AdvancedStrategyRollAgain {
 	public void testWhenOtherPlayerNeedsMoreRollsToWin() {
 		int opponentPointsToGoal = 54;
 		int pointsToGoal = 59;
-		
-		boolean result = this.strategy.rollAgain(0, 0, pointsToGoal, opponentPointsToGoal);
+
+		boolean result = this.strategy.rollAgain(0, 0, pointsToGoal,
+				opponentPointsToGoal);
 		assertEquals(true, result);
 	}
 
@@ -134,7 +135,40 @@ public class AdvancedStrategyRollAgain {
 		int opponentPointsToGoal = 59;
 		int pointsToGoal = 54;
 
-		boolean result = this.strategy.rollAgain(0, 0, pointsToGoal, opponentPointsToGoal);
+		boolean result = this.strategy.rollAgain(0, 0, pointsToGoal,
+				opponentPointsToGoal);
 		assertEquals(true, result);
+	}
+
+	/**
+	 * BOUNDARY Test when players expected number of rolls are equal and average
+	 * points per roll this turn are less than 7 (roll true)
+	 */
+	@Test
+	public void testWhenOtherPlayerEqualRollsToWinAndAveragePointsPerRollLessThan7() {
+		int opponentPointsToGoal = 54;
+		int pointsToGoal = 55;
+		int numberOfRollsSoFar = 3;
+		int pointsSoFarThisTurn = 19;
+
+		boolean result = this.strategy.rollAgain(numberOfRollsSoFar, pointsSoFarThisTurn, pointsToGoal,
+				opponentPointsToGoal);
+		assertEquals(true, result);
+	}
+
+	/**
+	 * BOUNDARY Test when players expected number of rolls are equal and average
+	 * points per roll this turn are more than 7 (roll false)
+	 */
+	@Test
+	public void testWhenOtherPlayerEqualRollsToWinAndAveragePointsPerRollMoreThan7() {
+		int opponentPointsToGoal = 54;
+		int pointsToGoal = 55;
+		int numberOfRollsSoFar = 3;
+		int pointsSoFarThisTurn = 28;
+
+		boolean result = this.strategy.rollAgain(numberOfRollsSoFar, pointsSoFarThisTurn, pointsToGoal,
+				opponentPointsToGoal);
+		assertEquals(false, result);
 	}
 }
