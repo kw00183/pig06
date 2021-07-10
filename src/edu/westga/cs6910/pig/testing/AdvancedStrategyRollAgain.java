@@ -171,4 +171,20 @@ public class AdvancedStrategyRollAgain {
 				opponentPointsToGoal);
 		assertEquals(false, result);
 	}
+	
+	/**
+	 * BOUNDARY Test when players expected number of rolls are equal and average
+	 * points per roll this turn equal 7.0 (roll false)
+	 */
+	@Test
+	public void testWhenOtherPlayerEqualRollsToWinAndAveragePointsPerRollEqualTo7() {
+		int opponentPointsToGoal = 54;
+		int pointsToGoal = 55;
+		int numberOfRollsSoFar = 3;
+		int pointsSoFarThisTurn = 21;
+
+		boolean result = this.strategy.rollAgain(numberOfRollsSoFar, pointsSoFarThisTurn, pointsToGoal,
+				opponentPointsToGoal);
+		assertEquals(false, result);
+	}
 }
