@@ -24,6 +24,8 @@ public class AdvancedStrategy implements PigStrategy {
 	 */
 	public boolean rollAgain(int numberOfRollsSoFar, int pointsSoFarThisTurn,
 			int pointsToGoal, int opponentPointsToGoal) {
+		boolean isStillTurn = false;
+		boolean isGameWon = true;
 		int expectedOtherPlayerNumberOfRollsLeft = (int) Math
 				.ceil(opponentPointsToGoal / 7);
 		int expectedPlayerNumberOfRollsLeft = (int) Math.ceil(pointsToGoal / 7);
@@ -34,26 +36,33 @@ public class AdvancedStrategy implements PigStrategy {
 					/ numberOfRollsSoFar;
 		}
 
-		if (expectedOtherPlayerNumberOfRollsLeft == expectedPlayerNumberOfRollsLeft
-				&& averagePointsPerRollThisTurn < 7.0 && pointsSoFarThisTurn > 0
-				&& pointsToGoal > 0 && opponentPointsToGoal > 0) {
+		if (numberOfRollsSoFar > 0 && pointsSoFarThisTurn > 0) {
+			isStillTurn = true;
+		}
+
+		if (pointsToGoal > 0 && opponentPointsToGoal > 0) {
+			isGameWon = false;
+		}
+
+		if (isStillTurn && !isGameWon && opponentPointsToGoal <= 7) {
 			return true;
-		} else if (expectedOtherPlayerNumberOfRollsLeft == expectedPlayerNumberOfRollsLeft
-				&& averagePointsPerRollThisTurn >= 7.0 && pointsSoFarThisTurn > 0
-				&& pointsToGoal > 0 && opponentPointsToGoal > 0) {
+		} else if (isStillTurn && !isGameWon
+				&& expectedOtherPlayerNumberOfRollsLeft > expectedPlayerNumberOfRollsLeft) {
 			return false;
-		} else if (expectedOtherPlayerNumberOfRollsLeft != expectedPlayerNumberOfRollsLeft
-				&& pointsSoFarThisTurn > 0 && pointsToGoal > 0
-				&& opponentPointsToGoal > 0) {
+		} else if (isStillTurn && !isGameWon
+				&& expectedOtherPlayerNumberOfRollsLeft < expectedPlayerNumberOfRollsLeft) {
 			return true;
-		} else if (pointsSoFarThisTurn > 0 && pointsToGoal > 0
-				&& opponentPointsToGoal <= 7) {
+		} else if (isStillTurn && !isGameWon
+				&& expectedOtherPlayerNumberOfRollsLeft == expectedPlayerNumberOfRollsLeft
+				&& averagePointsPerRollThisTurn < 7.0) {
 			return true;
-		} else if (numberOfRollsSoFar == 0 && pointsToGoal > 0
-				&& opponentPointsToGoal > 0) {
+		} else if (isStillTurn && !isGameWon
+				&& expectedOtherPlayerNumberOfRollsLeft == expectedPlayerNumberOfRollsLeft
+				&& averagePointsPerRollThisTurn >= 7.0) {
+			return false;
+		} else if (numberOfRollsSoFar == 0 && !isGameWon) {
 			return true;
-		} else if (pointsSoFarThisTurn > 0 && pointsToGoal > 0
-				&& opponentPointsToGoal > 0) {
+		} else if (isStillTurn && !isGameWon) {
 			return true;
 		}
 		return false;
