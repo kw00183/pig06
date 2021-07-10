@@ -33,4 +33,24 @@ public class AdvancedStrategyRollAgain {
 		boolean result = this.strategy.rollAgain(0, 0, 100, 100);
 		assertEquals(true, result);
 	}
+	
+	/**
+	 * SUNNY-DAY Test for the first roll of the game by the computer when the
+	 * human player rolled 1 and has no points
+	 */
+	@Test
+	public void testShouldReturnTrueAtStartOfGameAfterHumanPlayerHasGoneWithNoPoints() {
+		boolean result = this.strategy.rollAgain(0, 0, 100, 100);
+		assertEquals(true, result);
+	}
+
+	/**
+	 * SUNNY-DAY Test for the first roll of the game by the computer when the
+	 * human player rolled and now has points
+	 */
+	@Test
+	public void testShouldReturnTrueAtStartOfGameAfterHumanPlayerHasGoneWithSomePoints() {
+		boolean result = this.strategy.rollAgain(0, 0, 100, 93);
+		assertEquals(true, result);
+	}
 }
