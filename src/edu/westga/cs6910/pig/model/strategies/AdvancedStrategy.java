@@ -19,7 +19,12 @@ public class AdvancedStrategy implements PigStrategy {
 	 * @return						True if the player should roll again, false otherwise
 	 */
 	public boolean rollAgain(int numberOfRollsSoFar, int pointsSoFarThisTurn, int pointsToGoal, int opponentPointsToGoal) {
-		if (pointsSoFarThisTurn > 0 && pointsToGoal > 0 && opponentPointsToGoal <= 7) {
+		int expectedOtherPlayerNumberOfRollsLeft = (int) Math.ceil(opponentPointsToGoal / 7);
+		int expectedPlayerNumberOfRollsLeft = (int) Math.ceil(pointsToGoal / 7); 
+		
+		if (expectedOtherPlayerNumberOfRollsLeft != expectedPlayerNumberOfRollsLeft && pointsToGoal > 0 && opponentPointsToGoal > 0) {
+			return true;
+		} else if (pointsSoFarThisTurn > 0 && pointsToGoal > 0 && opponentPointsToGoal <= 7) {
 			return true;
 		} else if (numberOfRollsSoFar == 0 && pointsToGoal > 0 && opponentPointsToGoal > 0) {
 			return true;
