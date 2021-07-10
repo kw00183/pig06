@@ -19,6 +19,6 @@ public class AdvancedStrategy implements PigStrategy {
 	 * @return						True if the player should roll again, false otherwise
 	 */
 	public boolean rollAgain(int numberOfRollsSoFar, int pointsSoFarThisTurn, int pointsToGoal, int opponentPointsToGoal) {
-		return false;
+		return true;
 	}
 }
