@@ -73,4 +73,24 @@ public class AdvancedStrategyRollAgain {
 		boolean result = this.strategy.rollAgain(1, 10, -3, 13);
 		assertEquals(false, result);
 	}
+
+	/**
+	 * BOUNDARY Test when the other player has a valid roll, resulting in
+	 * exactly 100 points (had 93 and rolled a 7)
+	 */
+	@Test
+	public void testWhenOtherPlayerHasExactly100Points() {
+		boolean result = this.strategy.rollAgain(0, 0, 13, 0);
+		assertEquals(false, result);
+	}
+
+	/**
+	 * BOUNDARY Test when the other player has a valid roll, resulting in more
+	 * than 100 points (had 93 and rolled a 10)
+	 */
+	@Test
+	public void testWhenOtherPlayerExceeds100Points() {
+		boolean result = this.strategy.rollAgain(0, 0, 13, -3);
+		assertEquals(false, result);
+	}
 }
