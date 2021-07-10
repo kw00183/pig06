@@ -111,7 +111,7 @@ public class AdvancedStrategyRollAgain {
 		boolean result = this.strategy.rollAgain(1, 8, 13, 3);
 		assertEquals(true, result);
 	}
-	
+
 	/**
 	 * BOUNDARY Test when the other player needs more than 7 points to win
 	 */
@@ -123,10 +123,10 @@ public class AdvancedStrategyRollAgain {
 
 	/**
 	 * BOUNDARY Test when players expected number of rolls is more than
-	 * opponents using average 7 points per roll
+	 * opponents using average 7 points per roll and first roll
 	 */
 	@Test
-	public void testWhenOtherPlayerNeedsMoreRollsToWin() {
+	public void testWhenOtherPlayerNeedsMoreRollsToWinFirstRoll() {
 		int opponentPointsToGoal = 54;
 		int pointsToGoal = 59;
 
@@ -137,14 +137,42 @@ public class AdvancedStrategyRollAgain {
 
 	/**
 	 * BOUNDARY Test when players expected number of rolls is less than
-	 * opponents using average 7 points per roll
+	 * opponents using average 7 points per roll and first roll
 	 */
 	@Test
-	public void testWhenOtherPlayerNeedsLessRollsToWin() {
+	public void testWhenOtherPlayerNeedsLessRollsToWinFirstRoll() {
 		int opponentPointsToGoal = 59;
 		int pointsToGoal = 54;
 
 		boolean result = this.strategy.rollAgain(0, 0, pointsToGoal,
+				opponentPointsToGoal);
+		assertEquals(true, result);
+	}
+
+	/**
+	 * BOUNDARY Test when players expected number of rolls is more than
+	 * opponents using average 7 points per roll and last roll valid
+	 */
+	@Test
+	public void testWhenOtherPlayerNeedsMoreRollsToWin() {
+		int opponentPointsToGoal = 59;
+		int pointsToGoal = 54;
+
+		boolean result = this.strategy.rollAgain(1, 8, pointsToGoal,
+				opponentPointsToGoal);
+		assertEquals(false, result);
+	}
+
+	/**
+	 * BOUNDARY Test when players expected number of rolls is less than
+	 * opponents using average 7 points per roll and last roll valid
+	 */
+	@Test
+	public void testWhenOtherPlayerNeedsLessRollsToWin() {
+		int opponentPointsToGoal = 54;
+		int pointsToGoal = 59;
+
+		boolean result = this.strategy.rollAgain(1, 8, pointsToGoal,
 				opponentPointsToGoal);
 		assertEquals(true, result);
 	}
@@ -160,8 +188,8 @@ public class AdvancedStrategyRollAgain {
 		int numberOfRollsSoFar = 3;
 		int pointsSoFarThisTurn = 19;
 
-		boolean result = this.strategy.rollAgain(numberOfRollsSoFar, pointsSoFarThisTurn, pointsToGoal,
-				opponentPointsToGoal);
+		boolean result = this.strategy.rollAgain(numberOfRollsSoFar,
+				pointsSoFarThisTurn, pointsToGoal, opponentPointsToGoal);
 		assertEquals(true, result);
 	}
 
@@ -176,11 +204,11 @@ public class AdvancedStrategyRollAgain {
 		int numberOfRollsSoFar = 3;
 		int pointsSoFarThisTurn = 28;
 
-		boolean result = this.strategy.rollAgain(numberOfRollsSoFar, pointsSoFarThisTurn, pointsToGoal,
-				opponentPointsToGoal);
+		boolean result = this.strategy.rollAgain(numberOfRollsSoFar,
+				pointsSoFarThisTurn, pointsToGoal, opponentPointsToGoal);
 		assertEquals(false, result);
 	}
-	
+
 	/**
 	 * BOUNDARY Test when players expected number of rolls are equal and average
 	 * points per roll this turn equal 7.0 (roll false)
@@ -192,11 +220,11 @@ public class AdvancedStrategyRollAgain {
 		int numberOfRollsSoFar = 3;
 		int pointsSoFarThisTurn = 21;
 
-		boolean result = this.strategy.rollAgain(numberOfRollsSoFar, pointsSoFarThisTurn, pointsToGoal,
-				opponentPointsToGoal);
+		boolean result = this.strategy.rollAgain(numberOfRollsSoFar,
+				pointsSoFarThisTurn, pointsToGoal, opponentPointsToGoal);
 		assertEquals(false, result);
 	}
-	
+
 	/**
 	 * BOUNDARY Test when players expected number of rolls are equal and average
 	 * points per roll this turn equal 0.0 (roll true)
@@ -208,8 +236,8 @@ public class AdvancedStrategyRollAgain {
 		int numberOfRollsSoFar = 0;
 		int pointsSoFarThisTurn = 0;
 
-		boolean result = this.strategy.rollAgain(numberOfRollsSoFar, pointsSoFarThisTurn, pointsToGoal,
-				opponentPointsToGoal);
+		boolean result = this.strategy.rollAgain(numberOfRollsSoFar,
+				pointsSoFarThisTurn, pointsToGoal, opponentPointsToGoal);
 		assertEquals(true, result);
 	}
 }
